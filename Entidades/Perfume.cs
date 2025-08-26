@@ -10,5 +10,9 @@
         public required string Nome { get; set; }
         public required string Tipo { get; set; }
         public float Valor { get; set; }
+
+        public int PerfumistaId { get; set; }
+
+        public Perfumista? Perfumista { get; set; }
     }
 }

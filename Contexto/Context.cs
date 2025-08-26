@@ -13,5 +13,14 @@ namespace Perfumes.WebAPI.Contexto
         public Context(DbContextOptions<Context> options) : base(options) { }
 
         public DbSet<Perfume>? Perfumes { get; set; }
+        public DbSet<Perfumista>? Perfumistas { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Perfume>()
+                .HasOne(p => p.Perfumista)
+                .WithMany(pf => pf.Perfumes)
+                .HasForeignKey(p => p.PerfumistaId);
+        }
     }
 }
