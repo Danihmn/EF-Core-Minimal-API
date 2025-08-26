@@ -10,8 +10,8 @@ using Perfumes.WebAPI.Contexto;
 namespace Perfumes.WebAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20250823024041_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250826020645_PrimeiraMigration")]
+    partial class PrimeiraMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

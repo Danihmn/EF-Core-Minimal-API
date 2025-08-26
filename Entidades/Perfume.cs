@@ -1,7 +1,7 @@
 ﻿namespace Perfumes.WebAPI.Entidades
 {
     /// <summary>
-    /// Tabela de perfumes
+    /// Entidade de perfumes
     /// </summary>
     public class Perfume
     {
