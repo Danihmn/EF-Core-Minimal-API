@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Perfumes.WebAPI.Contexto;
-using Perfumes.WebAPI.Entidades;
 
 namespace Perfumes.WebAPI
 {
@@ -53,50 +52,8 @@ namespace Perfumes.WebAPI
 
             app.UseAuthorization();
 
-            #region Endpoints
-            app.MapGet("/perfumes", (Context context) =>
-            {
-                return context.Perfumes.ToList();
-            })
-            .WithOpenApi();
-
-            app.MapPost("/perfumes", (Perfume perfume, Context context) =>
-            {
-                context.Perfumes.Add(perfume);
-
-                context.SaveChanges();
-            })
-            .WithOpenApi();
-
-            app.MapPut("/perfumes", (int id, Context context, Perfume perfumeNovo) =>
-            {
-                var perfume = context.Perfumes.Find(id);
-
-                if (perfume != null)
-                {
-                    perfume.Marca = perfumeNovo.Marca;
-                    perfume.Nome = perfumeNovo.Nome;
-                    perfume.Tipo = perfumeNovo.Tipo;
-                    perfume.Valor = perfumeNovo.Valor;
-                }
-
-                context.SaveChanges();
-            })
-            .WithOpenApi();
-
-            app.MapDelete("/perfumes", (int id, Context context) =>
-            {
-                var perfume = context.Perfumes.Find(id);
-
-                if (perfume != null)
-                {
-                    context.Perfumes.Remove(perfume);
-                }
-
-                context.SaveChanges();
-            })
-            .WithOpenApi();
-            #endregion
+            // Acessa os endpoints
+            Endpoints.EndpointsPerfumes.MapPerfumesEndpoints(app);
 
             app.Run();
         }
