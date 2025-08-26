@@ -12,7 +12,6 @@
         public float Valor { get; set; }
 
         public int PerfumistaId { get; set; }
-
         public Perfumista? Perfumista { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace Perfumes.WebAPI.Migrations
 
                     b.HasIndex("PerfumistaId");
 
-                    b.ToTable("Perfumes");
+                    b.ToTable("Perfumes", (string)null);
                 });
 
             modelBuilder.Entity("Perfumes.WebAPI.Entidades.Perfumista", b =>
@@ -59,7 +59,7 @@ namespace Perfumes.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Perfumistas");
+                    b.ToTable("Perfumistas", (string)null);
                 });
 
             modelBuilder.Entity("Perfumes.WebAPI.Entidades.Perfume", b =>

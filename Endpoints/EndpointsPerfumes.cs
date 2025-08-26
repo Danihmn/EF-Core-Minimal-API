@@ -14,7 +14,7 @@ namespace Perfumes.WebAPI.Endpoints
         /// <param name="app">Recebe como parâmetro a estrutura central da aplicação Web</param>
         public static void MapPerfumesEndpoints(this WebApplication app)
         {
-            #region Endpoints
+            #region Endpoints Perfumes
             app.MapGet("/perfumes", (Context context) =>
             {
                 return context.Perfumes.ToList();
@@ -23,7 +23,7 @@ namespace Perfumes.WebAPI.Endpoints
 
             app.MapPost("/perfumes", (Perfume perfume, Context context) =>
             {
-                var perfumista = context.Perfumes.Find(perfume.PerfumistaId);
+                var perfumista = context.Perfumistas.Find(perfume.PerfumistaId);
 
                 context.Perfumes.Add(perfume);
 
@@ -68,7 +68,7 @@ namespace Perfumes.WebAPI.Endpoints
         /// <param name="app">Recebe como parâmetro a estrutura central da aplicação Web</param>
         public static void MapPerfumistasEndpoints(this WebApplication app)
         {
-            #region Endpoints
+            #region Endpoints Perfumistas
             app.MapGet("/perfumistas", (Context context) =>
             {
                 return context.Perfumistas.ToList();
