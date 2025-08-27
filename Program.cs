@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Perfumes.WebAPI.Contexto;
+using Perfumes.WebAPI.Endpoints;
 
 namespace Perfumes.WebAPI
 {
@@ -30,7 +31,7 @@ namespace Perfumes.WebAPI
                 {
                     Title = "API Perfumes",
                     Version = "v1",
-                    Description = "API para gerenciar estoque de perfumes.",
+                    Description = "API voltada para fins didáticos, utiliza exemplo de relacionamento entre perfumistas e seus perfumes",
 
                 });
             });
@@ -52,8 +53,8 @@ namespace Perfumes.WebAPI
 
             app.UseAuthorization();
 
-            Endpoints.EndpointsPerfumes.MapPerfumesEndpoints(app); // Acessa os endpoints da tabela de perfumes
-            Endpoints.EndpointsPerfumes.MapPerfumistasEndpoints(app); // Acessa os endpoints da tabela de perfumistas
+            EndpointsPerfumes.MapPerfumesEndpoints(app); // Acessa os endpoints da tabela de perfumes
+            EndpointsPerfumistas.MapPerfumistasEndpoints(app); // Acessa os endpoints da tabela de perfumistas
 
             app.Run();
         }
