@@ -32,7 +32,6 @@ namespace Perfumes.WebAPI
                     Title = "API Perfumes",
                     Version = "v1",
                     Description = "API voltada para fins didáticos, utiliza exemplo de relacionamento entre perfumistas e seus perfumes",
-
                 });
             });
 
