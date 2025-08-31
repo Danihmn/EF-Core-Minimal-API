@@ -1,4 +1,5 @@
-﻿using Perfumes.WebAPI.Contexto;
+﻿using Microsoft.EntityFrameworkCore;
+using Perfumes.WebAPI.Contexto;
 using Perfumes.WebAPI.Entidades;
 
 namespace Perfumes.WebAPI.Endpoints
@@ -17,7 +18,7 @@ namespace Perfumes.WebAPI.Endpoints
             #region Endpoints Perfumes
             app.MapGet("/perfumes", (Context context) =>
             {
-                return context.Perfumes.ToList();
+                return context.Perfumes.Include(p => p.Perfumista).ToList();
             })
             .WithOpenApi();
 

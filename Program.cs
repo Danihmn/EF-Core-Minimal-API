@@ -17,6 +17,13 @@ namespace Perfumes.WebAPI
             // Registrando banco de dados
             builder.Services.AddDbContext<Context>(options => options.UseSqlite(connectionString));
 
+            // Configuração para evitar ciclos infinitos nas consultas
+            builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+            {
+                options.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.SerializerOptions.WriteIndented = true;
+            });
+
             // Add services to the container.
             builder.Services.AddAuthorization();
 

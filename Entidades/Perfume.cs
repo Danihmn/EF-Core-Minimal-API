@@ -11,7 +11,7 @@
         public required string Tipo { get; set; }
         public float Valor { get; set; }
 
-        public int PerfumistaId { get; set; }
+        public required int PerfumistaId { get; set; }
         public Perfumista? Perfumista { get; set; }
     }
 }
