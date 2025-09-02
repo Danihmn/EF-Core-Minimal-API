@@ -15,9 +15,9 @@ namespace Perfumes.WebAPI.Contexto
         public DbSet<Perfume>? Perfumes { get; set; }
         public DbSet<Perfumista>? Perfumistas { get; set; }
 
-        // Reforça o mapeamento do banco de dados
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Fluent API para reforçar o mapeamento do banco de dados
             modelBuilder.Entity<Perfume>()
                 .HasOne(p => p.Perfumista)
                 .WithMany(pf => pf.Perfumes)

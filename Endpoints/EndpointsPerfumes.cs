@@ -16,12 +16,21 @@ namespace Perfumes.WebAPI.Endpoints
         public static void MapPerfumesEndpoints(this WebApplication app)
         {
             #region Endpoints Perfumes
+            // Acessa todos os perfumes
             app.MapGet("/perfumes", (Context context) =>
             {
                 return context.Perfumes.Include(p => p.Perfumista).ToList();
             })
             .WithOpenApi();
 
+            // Acessa o perfume através do seu Id
+            app.MapGet("/perfumes/{id}", (Context context, int id) =>
+            {
+                return context.Perfumes.Where(perfume => perfume.Id == id).Include(p => p.Perfumista).ToList();
+            })
+            .WithOpenApi();
+
+            // Insere perfumes
             app.MapPost("/perfumes", (Perfume perfume, Context context) =>
             {
                 var perfumista = context.Perfumistas.Find(perfume.PerfumistaId);
@@ -32,6 +41,7 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
+            // Modifica perfumes
             app.MapPut("/perfumes", (int id, Context context, Perfume perfumeNovo) =>
             {
                 var perfume = context.Perfumes.Find(id);
@@ -48,6 +58,7 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
+            // Deleta perfumes
             app.MapDelete("/perfumes", (int id, Context context) =>
             {
                 var perfume = context.Perfumes.Find(id);

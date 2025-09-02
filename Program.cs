@@ -14,10 +14,10 @@ namespace Perfumes.WebAPI
             // String de conexão do JSON
             var connectionString = builder.Configuration.GetConnectionString("Default");
 
-            // Registrando banco de dados
-            builder.Services.AddDbContext<Context>(options => options.UseSqlite(connectionString));
+            // Registrando a ConnectionString nas configurações Json, e configurando para receber Logs conforme o EF Core trabalha
+            builder.Services.AddDbContext<Context>(options => options.UseSqlite(connectionString).LogTo(Console.WriteLine, LogLevel.Information));
 
-            // Configuração para evitar ciclos infinitos nas consultas
+            // Configuração para evitar ciclos infinitos nas consultas com .Include()
             builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
             {
                 options.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
@@ -56,7 +56,6 @@ namespace Perfumes.WebAPI
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
 
             EndpointsPerfumes.MapPerfumesEndpoints(app); // Acessa os endpoints da tabela de perfumes
