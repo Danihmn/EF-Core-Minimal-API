@@ -31,12 +31,20 @@ namespace Perfumes.WebAPI.Endpoints
             .WithOpenApi();
 
             // Acessa o perfume através do seu nome
-            app.MapGet("/perfumes/porNome/{nome}", (Context context, string nome) =>
+            app.MapGet("/perfumesEFFunctions/porNome/{nome}", (Context context, string nome) =>
             {
                 // Utiliza função Like do EF para localizar os dados, sem a necessidade das strings terem que ser idênticas
                 // Nos parâmetros da função Like, os % dizem que deve ser localizado tudo aquilo que vem antes e depois do que foi digitado
                 return context.Perfumes.Where(
                     perfume => EF.Functions.Like(perfume.Nome, $"%{nome}%")).Include(perfumista => perfumista.Perfumista).ToList();
+            })
+            .WithOpenApi();
+
+            // Acessa o perfume através do seu nome
+            app.MapGet("/perfumesLinQ/porNome/{nome}", (Context context, string nome) =>
+            {
+                // Utiliza LinQ para localizar o perfume com base no nome escrito
+                return context.Perfumes.Where(perfume => perfume.Nome.Contains(nome)).Include(perfumista => perfumista.Perfumista).ToList();
             })
             .WithOpenApi();
 
