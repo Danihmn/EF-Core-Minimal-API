@@ -30,7 +30,7 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
-            // Acessa o perfume através do seu nome
+            // Acessa o perfume através do seu nome com EF Core Functions
             app.MapGet("/perfumesEFFunctions/porNome/{nome}", (Context context, string nome) =>
             {
                 // Utiliza função Like do EF para localizar os dados, sem a necessidade das strings terem que ser idênticas
@@ -40,7 +40,7 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
-            // Acessa o perfume através do seu nome
+            // Acessa o perfume através do seu nome com LinQ
             app.MapGet("/perfumesLinQ/porNome/{nome}", (Context context, string nome) =>
             {
                 // Utiliza LinQ para localizar o perfume com base no nome escrito
