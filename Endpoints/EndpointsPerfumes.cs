@@ -19,7 +19,12 @@ namespace Perfumes.WebAPI.Endpoints
             // Acessa todos os perfumes
             app.MapGet("/perfumes", (Context context) =>
             {
-                return context.Perfumes.Include(p => p.Perfumista).ToList();
+                // Retorna todos os perfumes, ordenados pelos seus nomes, e após, pelos seus valores
+                return context.Perfumes
+                .Include(p => p.Perfumista)
+                .OrderBy(perfume => perfume.Nome)
+                .ThenBy(perfume => perfume.Valor)
+                .ToList();
             })
             .WithOpenApi();
 
