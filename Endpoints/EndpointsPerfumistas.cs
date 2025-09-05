@@ -27,10 +27,36 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
+            // Acessa apenas o primeiro perfumista da tabela
+            app.MapGet("/perfumistas/primeiroPerfumista", (Context context) =>
+            {
+                return context.Perfumistas
+                .Include(perfume => perfume.Perfumes)
+                .FirstOrDefault();
+            })
+            .WithOpenApi();
+
+            // Acessa apenas o ultimo perfumista da tabela
+            app.MapGet("/perfumistas/ultimoPerfumista", (Context context) =>
+            {
+                return context.Perfumistas
+                .Include(perfume => perfume.Perfumes)
+                .OrderBy(perfumista => perfumista.Nome)
+                .LastOrDefault();
+
+                // Formas de acessar o último da tabela:
+                // OrderBy().lastOrDefault()
+                // OrderByDescending().FirstOrDefault()
+            })
+            .WithOpenApi();
+
             // Acessa o perfumista pelo seu Id
             app.MapGet("/perfumistas/{id}", (Context context, int id) =>
             {
-                return context.Perfumistas.Where(diretor => diretor.Id == id).Include(perfumista => perfumista.Perfumes).ToList();
+                return context.Perfumistas
+                .Where(diretor => diretor.Id == id)
+                .Include(perfumista => perfumista.Perfumes)
+                .ToList();
             })
             .WithOpenApi();
 
