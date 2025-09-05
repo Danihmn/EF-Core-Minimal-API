@@ -89,6 +89,21 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
+            // Acessa apenas o primeiro perfumista da lista, através de seu nome
+            app.MapGet("/perfumistas/retornaDefault/{nome}", (Context context, string nome) =>
+            {
+                // Caso o perfumista não for encontrado na consulta, será retornado um perfume Default, que é instanciado
+                return context.Perfumistas
+                .Include(perfumes => perfumes.Perfumes)
+                .FirstOrDefault(perfumista => perfumista.Nome.Contains(nome)) ??
+                new Perfumista
+                {
+                    Id = 404,
+                    Nome = "Giorgio Armani"
+                };
+            })
+            .WithOpenApi();
+
             // Insere perfumistas
             app.MapPost("/perfumistas", (Perfumista perfumista, Context context) =>
             {
