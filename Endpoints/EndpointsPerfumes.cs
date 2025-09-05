@@ -62,7 +62,7 @@ namespace Perfumes.WebAPI.Endpoints
             .WithOpenApi();
 
             // Acessa apenas o nome do perfume através do seu Id
-            app.MapGet("/perfumes/{id}", (Context context, int id) =>
+            app.MapGet("/perfumes/apenasNome{id}", (Context context, int id) =>
             {
                 return context.Perfumes
                 .Where(perfume => perfume.Id == id)
@@ -87,6 +87,26 @@ namespace Perfumes.WebAPI.Endpoints
             {
                 // Utiliza LinQ para localizar o perfume com base no nome escrito
                 return context.Perfumes.Where(perfume => perfume.Nome.Contains(nome)).Include(perfumista => perfumista.Perfumista).ToList();
+            })
+            .WithOpenApi();
+
+            // Acessa apenas o primeiro perfume da lista, através de seu nome
+            app.MapGet("/perfumes/retornaDefault/{nome}", (Context context, string nome) =>
+            {
+                // Caso o perfume não for encontrado na consulta, será retornado um perfume Default, que é instanciado
+                return context.Perfumes
+                .Include(perfumista => perfumista.Perfumista)
+                .FirstOrDefault(perfume => perfume.Nome.Contains(nome)) ??
+                new Perfume
+                {
+                    Id = 404,
+                    Marca = "Emporio Armani",
+                    Nome = "Stronger With You",
+                    Tipo = "Eau de Parfum",
+                    Valor = 800,
+                    PerfumistaId = 404,
+                    Perfumista = new Perfumista { Id = 404, Nome = "Giorgio Armani" }
+                };
             })
             .WithOpenApi();
 
