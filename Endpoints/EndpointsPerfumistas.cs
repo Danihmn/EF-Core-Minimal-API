@@ -60,6 +60,17 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
+            // Acessa apenas o nome do perfumista pelo seu Id
+            app.MapGet("/perfumistas/nomePerfumista{id}", (Context context, int id) =>
+            {
+                return context.Perfumistas
+                .Where(diretor => diretor.Id == id)
+                .Include(perfumista => perfumista.Perfumes)
+                .Select(perfumista => perfumista.Nome)
+                .ToList();
+            })
+            .WithOpenApi();
+
             // Acessa o perfumista pelo seu nome com EF Core Funcions
             app.MapGet("/perfumistasEFFunctions/porNome/{nome}", (Context context, string nome) =>
             {

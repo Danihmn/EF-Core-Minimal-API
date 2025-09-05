@@ -54,7 +54,21 @@ namespace Perfumes.WebAPI.Endpoints
             // Acessa o perfume através do seu Id
             app.MapGet("/perfumes/{id}", (Context context, int id) =>
             {
-                return context.Perfumes.Where(perfume => perfume.Id == id).Include(perfumista => perfumista.Perfumista).ToList();
+                return context.Perfumes
+                .Where(perfume => perfume.Id == id)
+                .Include(perfumista => perfumista.Perfumista)
+                .ToList();
+            })
+            .WithOpenApi();
+
+            // Acessa apenas o nome do perfume através do seu Id
+            app.MapGet("/perfumes/{id}", (Context context, int id) =>
+            {
+                return context.Perfumes
+                .Where(perfume => perfume.Id == id)
+                .Include(perfumista => perfumista.Perfumista)
+                .Select(perfume => perfume.Nome)
+                .ToList();
             })
             .WithOpenApi();
 
