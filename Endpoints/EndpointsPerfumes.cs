@@ -28,6 +28,29 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
+            // Acessa apenas o primeiro perfume da tabela
+            app.MapGet("/perfumes/primeiroPerfume", (Context context) =>
+            {
+                return context.Perfumes
+                .Include(p => p.Perfumista)
+                .FirstOrDefault();
+            })
+            .WithOpenApi();
+
+            // Acessa apenas o ultimo perfume da tabela
+            app.MapGet("/perfumes/ultimoPerfume", (Context context) =>
+            {
+                return context.Perfumes
+                .Include(p => p.Perfumista)
+                .OrderByDescending(perfume => perfume.Nome)
+                .FirstOrDefault();
+
+                // Formas de acessar o último da tabela:
+                // OrderBy().lastOrDefault()
+                // OrderByDescending().FirstOrDefault()
+            })
+            .WithOpenApi();
+
             // Acessa o perfume através do seu Id
             app.MapGet("/perfumes/{id}", (Context context, int id) =>
             {
