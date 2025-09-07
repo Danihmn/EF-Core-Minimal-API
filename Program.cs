@@ -11,49 +11,18 @@ namespace Perfumes.WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // String de conexão do JSON
-            var connectionString = builder.Configuration.GetConnectionString("Default");
-
-            // Registrando a ConnectionString nas configurações Json, e configurando para receber Logs conforme o EF Core trabalha
-            builder.Services.AddDbContext<Context>(options => options.UseSqlite(connectionString).LogTo(Console.WriteLine, LogLevel.Information));
-
-            // Configuração para evitar ciclos infinitos nas consultas com .Include()
-            builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
-            {
-                options.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-                options.SerializerOptions.WriteIndented = true;
-            });
-
-            // Add services to the container.
-            builder.Services.AddAuthorization();
-
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-
-            // Adiciona o Swagger
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "API Perfumes",
-                    Version = "v1",
-                    Description = "API voltada para fins didáticos, utiliza exemplo de relacionamento entre perfumistas e seus perfumes",
-                });
-            });
+            // Configura serviços
+            builder.Services
+                .AddDatabase(builder.Configuration)
+                .AddJsonOptions()
+                .AddSwaggerDocumentation()
+                .AddAuthorization();
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Perfumes v1");
-                    c.RoutePrefix = string.Empty; // Abre o Swagger na raiz
-                });
-            }
+                app.UseSwaggerDocumentation();
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
@@ -62,6 +31,63 @@ namespace Perfumes.WebAPI
             EndpointsPerfumistas.MapPerfumistasEndpoints(app); // Acessa os endpoints da tabela de perfumistas
 
             app.Run();
+        }
+    }
+
+    /// <summary>
+    /// Classe de serviços adicionais
+    /// </summary>
+    public static class ServicesExtension
+    {
+        // Método responsável por registrar o DbContext no arquivo Json de configurações
+        public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration builder)
+        {
+            var connectionString = builder.GetConnectionString("Default");
+            services.AddDbContext<Context>(options => options.UseSqlite(connectionString).LogTo(Console.WriteLine, LogLevel.Information));
+
+            return services;
+        }
+
+        // Método responsável por fazer os ciclos infinitos não ocorrerem com .Include()
+        public static IServiceCollection AddJsonOptions(this IServiceCollection services)
+        {
+            services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+            {
+                options.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.SerializerOptions.WriteIndented = true;
+            });
+
+            return services;
+        }
+
+        // Método responsável por inserir o Swagger
+        public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
+        {
+            services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "API Perfumes",
+                    Version = "v1",
+                    Description = "API didática com perfumistas e perfumes",
+                });
+            });
+
+            return services;
+        }
+
+        // Método responsável por abrir o Swagger
+        public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app)
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Perfumes v1");
+                c.RoutePrefix = string.Empty; // Abre o Swagger na raiz
+            });
+
+            return app;
         }
     }
 }
