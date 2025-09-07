@@ -39,7 +39,7 @@ namespace Perfumes.WebAPI
     /// </summary>
     public static class ServicesExtension
     {
-        // Método responsável por registrar o DbContext no arquivo Json de configurações
+        // Método responsável por registrar o DbContext no ciclo de vida
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration builder)
         {
             var connectionString = builder.GetConnectionString("Default");
