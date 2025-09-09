@@ -52,7 +52,7 @@ namespace Perfumes.WebAPI.Endpoints
             .WithOpenApi();
 
             // Acessa o perfume através do seu Id
-            app.MapGet("/perfumes/{id}", (Context context, int id) =>
+            app.MapGet("/perfumes/{perfumeId}", (Context context, int id) =>
             {
                 return context.Perfumes
                 .Where(perfume => perfume.Id == id)
@@ -62,7 +62,7 @@ namespace Perfumes.WebAPI.Endpoints
             .WithOpenApi();
 
             // Acessa apenas o nome do perfume através do seu Id
-            app.MapGet("/perfumes/apenasNome{id}", (Context context, int id) =>
+            app.MapGet("/perfumes/apenasNome{perfumeId}", (Context context, int id) =>
             {
                 return context.Perfumes
                 .Where(perfume => perfume.Id == id)
@@ -138,17 +138,10 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
-            // Deleta perfumes
-            app.MapDelete("/perfumes", (int id, Context context) =>
+            // Deleta perfumes com base em seus Ids
+            app.MapDelete("/perfumes/{perfumeId}", (int perfumeId, Context context) =>
             {
-                var perfume = context.Perfumes.Find(id);
-
-                if (perfume != null)
-                {
-                    context.Perfumes.Remove(perfume);
-                }
-
-                context.SaveChanges();
+                context.Perfumes.Where(perfume => perfume.Id == perfumeId).ExecuteDelete<Perfume>();
             })
             .WithOpenApi();
             #endregion
