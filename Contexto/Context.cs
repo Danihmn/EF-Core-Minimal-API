@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Perfumes.WebAPI.Entidades;
-
-namespace Perfumes.WebAPI.Contexto
+﻿namespace Perfumes.WebAPI.Contexto
 {
     /// <summary>
     /// Sessão onde o EF Core trabalha.

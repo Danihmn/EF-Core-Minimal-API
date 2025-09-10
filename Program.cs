@@ -1,8 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using Perfumes.WebAPI.Contexto;
-using Perfumes.WebAPI.Endpoints;
-
 namespace Perfumes.WebAPI
 {
     public class Program

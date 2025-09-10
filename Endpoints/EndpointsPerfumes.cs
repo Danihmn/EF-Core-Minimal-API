@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Perfumes.WebAPI.Contexto;
-using Perfumes.WebAPI.Entidades;
-
-namespace Perfumes.WebAPI.Endpoints
+﻿namespace Perfumes.WebAPI.Endpoints
 {
     /// <summary>
     /// Classe onde se localizam os Endpoints da tabela de perfumes da API
@@ -138,10 +134,29 @@ namespace Perfumes.WebAPI.Endpoints
             })
             .WithOpenApi();
 
+            // Modifica apenas uma parte, com base em seu Id
+            app.MapPatch("/perfumes", (Context context, PerfumeUpdate perfumeUpdate) =>
+            {
+                var linhasAfetadas = context.Perfumes
+                .Where(perfume => perfume.Id == perfumeUpdate.Id)
+                .ExecuteUpdate(setter => setter
+                    .SetProperty(perfume => perfume.Marca, perfumeUpdate.Marca)
+                    .SetProperty(perfume => perfume.Nome, perfumeUpdate.Nome)
+                );
+
+                if (linhasAfetadas > 0)
+                    return Results.Ok($"Você teve um total de {linhasAfetadas} linha(s) afetada(s)");
+                else
+                    return Results.NoContent();
+            })
+            .WithOpenApi();
+
             // Deleta perfumes com base em seus Ids
             app.MapDelete("/perfumes/{perfumeId}", (int perfumeId, Context context) =>
             {
-                context.Perfumes.Where(perfume => perfume.Id == perfumeId).ExecuteDelete<Perfume>();
+                context.Perfumes
+                .Where(perfume => perfume.Id == perfumeId)
+                .ExecuteDelete<Perfume>();
             })
             .WithOpenApi();
             #endregion

@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Perfumes.WebAPI.Contexto;
-using Perfumes.WebAPI.Entidades;
-
-namespace Perfumes.WebAPI.Endpoints
+﻿namespace Perfumes.WebAPI.Endpoints
 {
     /// <summary>
     /// Classe onde se localizam os Endpoints da tabela de perfumistas da API
