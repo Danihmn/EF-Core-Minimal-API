@@ -1,4 +1,5 @@
-﻿global using Microsoft.EntityFrameworkCore;
+﻿// Importações globais do projeto
+global using Microsoft.EntityFrameworkCore;
 global using Microsoft.OpenApi.Models;
 global using Perfumes.WebAPI.Contexto;
 global using Perfumes.WebAPI.Endpoints;
