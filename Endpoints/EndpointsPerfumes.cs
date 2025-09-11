@@ -134,8 +134,27 @@
             })
             .WithOpenApi();
 
-            // Modifica apenas uma parte, com base em seu Id
-            app.MapPatch("/perfumes", (Context context, PerfumeUpdate perfumeUpdate) =>
+            // Modifica apenas uma parte, com base em seu Id, com Update();
+            app.MapPatch("/perfumes/update", (Context context, PerfumeUpdate perfumeUpdate) =>
+            {
+                var perfume = context.Perfumes.Find(perfumeUpdate.Id);
+
+                if (perfume == null)
+                    return Results.NotFound("Perfume não encontrado");
+
+                perfume.Marca = perfumeUpdate.Marca;
+                perfume.Nome = perfumeUpdate.Nome;
+                perfume.Tipo = perfumeUpdate.Tipo;
+
+                context.Perfumes.Update(perfume);
+                context.SaveChanges();
+
+                return Results.Ok();
+            })
+            .WithOpenApi();
+
+            // Modifica apenas uma parte, com base em seu Id, com ExecuteUpdate();
+            app.MapPatch("/perfumes/executeUpdate", (Context context, PerfumeUpdate perfumeUpdate) =>
             {
                 var linhasAfetadas = context.Perfumes
                 .Where(perfume => perfume.Id == perfumeUpdate.Id)

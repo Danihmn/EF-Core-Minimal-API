@@ -8,6 +8,7 @@
         public required int Id { get; init; }
         public required string Marca { get; init; }
         public required string Nome { get; init; }
+        public required string Tipo { get; init; }
         public required float Valor { get; init; }
     }
 }
