@@ -4,3 +4,4 @@ global using Microsoft.OpenApi.Models;
 global using Perfumes.WebAPI.Contexto;
 global using Perfumes.WebAPI.Endpoints;
 global using Perfumes.WebAPI.Entidades;
+global using Perfumes.WebAPI.Endpoints.Services;
