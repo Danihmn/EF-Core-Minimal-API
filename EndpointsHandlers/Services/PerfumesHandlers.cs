@@ -4,7 +4,7 @@
     /// Classe referente aos Handlers que trabalham quando
     /// os Endpoints de Perfumes são chamados
     /// </summary>
-    public static class PerfumesServices
+    public static class PerfumesHandlers
     {
         #region Consultas
         public static List<Perfume> ObterTodos(Context context) =>

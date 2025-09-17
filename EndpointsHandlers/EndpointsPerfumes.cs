@@ -1,0 +1,45 @@
+﻿namespace Perfumes.WebAPI.Endpoints
+{
+    /// <summary>
+    /// Classe onde se localizam os Endpoints da tabela de perfumes da API
+    /// </summary>
+    public static class EndpointsPerfumes
+    {
+        /// <summary>
+        /// Endpoints da tabela de perfumes
+        /// </summary>
+        /// <param name="app">Recebe como parâmetro a estrutura central da aplicação Web</param>
+        public static void MapPerfumesEndpoints(this WebApplication app)
+        {
+            #region Consultas
+            app.MapGet("/perfumes", PerfumesHandlers.ObterTodos).WithOpenApi();
+
+            app.MapGet("/perfumes/primeiroPerfume", PerfumesHandlers.PrimeiroPerfume).WithOpenApi();
+
+            app.MapGet("/perfumes/ultimoPerfume", PerfumesHandlers.UltimoPerfume).WithOpenApi();
+
+            app.MapGet("/perfumes/{perfumeId}", PerfumesHandlers.BuscaPorId).WithOpenApi();
+
+            app.MapGet("/perfumes/apenasNome{perfumeId}", PerfumesHandlers.BuscaNomePorId).WithOpenApi();
+
+            app.MapGet("/perfumesEFFunctions/porNome/{nome}", PerfumesHandlers.BuscaNomeComEFFunctions).WithOpenApi();
+
+            app.MapGet("/perfumesLinQ/porNome/{nome}", PerfumesHandlers.BuscaNomeComLinQ).WithOpenApi();
+
+            app.MapGet("/perfumes/retornaDefault/{nome}", PerfumesHandlers.RetornaDefault).WithOpenApi();
+            #endregion
+
+            #region Inserções, modificações e deleções
+            app.MapPost("/perfumes", PerfumesHandlers.InserePerfume).WithOpenApi();
+
+            app.MapPut("/perfumes", PerfumesHandlers.ModificaPerfume).WithOpenApi();
+
+            app.MapPatch("/perfumes/update", PerfumesHandlers.AlteraPerfumeComUpdate).WithOpenApi();
+
+            app.MapPatch("/perfumes/executeUpdate", PerfumesHandlers.AlteraPerfumeComExecuteUpdate).WithOpenApi();
+
+            app.MapDelete("/perfumes/{perfumeId}", PerfumesHandlers.RemovePerfumePorId).WithOpenApi();
+            #endregion
+        }
+    }
+}

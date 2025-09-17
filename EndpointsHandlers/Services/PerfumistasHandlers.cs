@@ -1,6 +1,6 @@
 ﻿namespace Perfumes.WebAPI.Endpoints.Services
 {
-    public class PerfumistasServices
+    public class PerfumistasHandlers
     {
     }
 }
