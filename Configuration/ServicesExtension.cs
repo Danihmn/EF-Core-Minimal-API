@@ -5,7 +5,7 @@
     /// </summary>
     public static class ServicesExtension
     {
-        // Método responsável por registrar o DbContext no ciclo de vida
+        // Método que injeta as dependências do banco de dados
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration builder)
         {
             var connectionString = builder.GetConnectionString("Default");
@@ -26,7 +26,7 @@
             return services;
         }
 
-        // Método responsável por inserir o Swagger
+        // Método responsável por adicionar o Swagger
         public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
         {
             services.AddEndpointsApiExplorer();
