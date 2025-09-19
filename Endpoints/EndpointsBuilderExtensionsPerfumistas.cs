@@ -3,13 +3,13 @@
     /// <summary>
     /// Classe onde se localizam os Endpoints da tabela de perfumistas da API
     /// </summary>
-    public static class EndpointsPerfumistas
+    public static class EndpointsBuilderExtensionsPerfumistas
     {
         /// <summary>
         /// Endpoints da tabela de perfumistas
         /// </summary>
         /// <param name="app">Recebe como parâmetro a estrutura central da aplicação Web</param>
-        public static void MapPerfumistasEndpoints(this WebApplication app)
+        public static void MapPerfumistasEndpoints(this IEndpointRouteBuilder app)
         {
             #region Consultas
             app.MapGet("/perfumistas", PerfumistasHandlers.ObterTodos).WithOpenApi();

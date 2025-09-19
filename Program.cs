@@ -22,8 +22,8 @@ namespace Perfumes.WebAPI
             app.UseHttpsRedirection();
             app.UseAuthorization();
 
-            EndpointsPerfumes.MapPerfumesEndpoints(app); // Acessa os endpoints da tabela de perfumes
-            EndpointsPerfumistas.MapPerfumistasEndpoints(app); // Acessa os endpoints da tabela de perfumistas
+            app.MapPerfumesEndpoints(); // Acessa os endpoints da tabela de perfumes
+            app.MapPerfumistasEndpoints(); // Acessa os endpoints da tabela de perfumistas
 
             app.Run();
         }
