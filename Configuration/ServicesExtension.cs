@@ -17,9 +17,9 @@
         // Método responsável por fazer os ciclos infinitos não ocorrerem com .Include()
         public static IServiceCollection AddJsonOptions(this IServiceCollection services)
         {
-            services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+            services.Configure<JsonOptions>(options =>
             {
-                options.SerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 options.SerializerOptions.WriteIndented = true;
             });
 

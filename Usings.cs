@@ -6,3 +6,5 @@ global using Perfumes.WebAPI.Endpoints;
 global using Perfumes.WebAPI.Entidades;
 global using Perfumes.WebAPI.Endpoints.Services;
 global using Perfumes.WebAPI.Configuration;
+global using Microsoft.AspNetCore.Http.Json;
+global using System.Text.Json.Serialization;
