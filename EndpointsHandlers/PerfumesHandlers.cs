@@ -1,4 +1,4 @@
-﻿namespace Perfumes.WebAPI.Endpoints.Services
+﻿namespace Perfumes.WebAPI.EndpointsHandlers
 {
     /// <summary>
     /// Classe referente aos Handlers que trabalham na lógica do CRUD quando
