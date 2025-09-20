@@ -1,11 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.0.11005.162 d18.0
+VisualStudioVersion = 18.0.11005.162
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfumes.WebAPI", "Perfumes.WebAPI.csproj", "{6CE083BF-4915-4870-A185-A13FCEB5F890}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5FCC39DE-5712-46B4-9030-335E914066C1} = {5FCC39DE-5712-46B4-9030-335E914066C1}
+		{D5BDFBE7-317F-47E1-85A3-05D7C95A2C09} = {D5BDFBE7-317F-47E1-85A3-05D7C95A2C09}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testes.Perfumes.WebAPI", "..\Testes.Perfumes.WebAPI\Testes.Perfumes.WebAPI.csproj", "{58F7AB13-217A-40F2-A42C-8455AC0A4AE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfumes.WebAPI.Domain", "..\Perfumes.WebAPI.Domain\Perfumes.WebAPI.Domain.csproj", "{D5BDFBE7-317F-47E1-85A3-05D7C95A2C09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Perfumes.WebAPI.Repo", "..\Perfumes.WebAPI.Repo\Perfumes.WebAPI.Repo.csproj", "{5FCC39DE-5712-46B4-9030-335E914066C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,14 @@ Global
 		{58F7AB13-217A-40F2-A42C-8455AC0A4AE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58F7AB13-217A-40F2-A42C-8455AC0A4AE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58F7AB13-217A-40F2-A42C-8455AC0A4AE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5BDFBE7-317F-47E1-85A3-05D7C95A2C09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5BDFBE7-317F-47E1-85A3-05D7C95A2C09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5BDFBE7-317F-47E1-85A3-05D7C95A2C09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5BDFBE7-317F-47E1-85A3-05D7C95A2C09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FCC39DE-5712-46B4-9030-335E914066C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FCC39DE-5712-46B4-9030-335E914066C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FCC39DE-5712-46B4-9030-335E914066C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FCC39DE-5712-46B4-9030-335E914066C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
