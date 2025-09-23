@@ -14,19 +14,9 @@
             #region Consultas
             app.MapGet("/perfumes", PerfumesHandlers.ObterTodos).WithOpenApi();
 
-            app.MapGet("/perfumes/primeiroPerfume", PerfumesHandlers.PrimeiroPerfume).WithOpenApi();
+            app.MapGet("/perfumes/porId", PerfumesHandlers.BuscaPorId).WithOpenApi();
 
-            app.MapGet("/perfumes/ultimoPerfume", PerfumesHandlers.UltimoPerfume).WithOpenApi();
-
-            app.MapGet("/perfumes/{perfumeId}", PerfumesHandlers.BuscaPorId).WithOpenApi();
-
-            app.MapGet("/perfumes/apenasNome{perfumeId}", PerfumesHandlers.BuscaNomePorId).WithOpenApi();
-
-            app.MapGet("/perfumesEFFunctions/porNome/{nome}", PerfumesHandlers.BuscaNomeComEFFunctions).WithOpenApi();
-
-            app.MapGet("/perfumesLinQ/porNome/{nome}", PerfumesHandlers.BuscaNomeComLinQ).WithOpenApi();
-
-            app.MapGet("/perfumes/retornaDefault/{nome}", PerfumesHandlers.RetornaDefault).WithOpenApi();
+            app.MapGet("/perfumesLinQ/porNome/{nome}", PerfumesHandlers.BuscaPorNome).WithOpenApi();
             #endregion
 
             #region Inserções, modificações e deleções
