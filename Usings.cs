@@ -8,3 +8,5 @@ global using Microsoft.AspNetCore.Http.Json;
 global using System.Text.Json.Serialization;
 global using Perfumes.WebAPI.Domain.Entidades;
 global using Perfumes.WebAPI.Domain.Contexto;
+global using Perfumes.WebAPI.Repo.Contratos;
+global using Perfumes.WebAPI.Repo;

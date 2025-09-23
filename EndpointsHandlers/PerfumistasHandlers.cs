@@ -60,7 +60,7 @@
         #region Inserções, modificações e deleções
         public static void InserePerfumista(Context context, Perfumista perfumista)
         {
-            context.Perfumistas.Add(perfumista);
+            context.Add(perfumista);
             context.SaveChanges();
         }
 

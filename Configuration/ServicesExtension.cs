@@ -11,6 +11,8 @@
             var connectionString = builder.GetConnectionString("Default");
             services.AddDbContext<Context>(options => options.UseSqlite(connectionString).LogTo(Console.WriteLine, LogLevel.Information));
 
+            services.AddScoped<IPerfumeRepository, PerfumeRepository>();
+
             return services;
         }
 

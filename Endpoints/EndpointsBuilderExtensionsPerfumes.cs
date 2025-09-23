@@ -34,11 +34,7 @@
 
             app.MapPut("/perfumes", PerfumesHandlers.ModificaPerfume).WithOpenApi();
 
-            app.MapPatch("/perfumes/update", PerfumesHandlers.AlteraPerfumeComUpdate).WithOpenApi();
-
-            app.MapPatch("/perfumes/executeUpdate", PerfumesHandlers.AlteraPerfumeComExecuteUpdate).WithOpenApi();
-
-            app.MapDelete("/perfumes/{perfumeId}", PerfumesHandlers.RemovePerfumePorId).WithOpenApi();
+            app.MapDelete("/perfumes/{perfumeId}", PerfumesHandlers.RemovePerfume).WithOpenApi();
             #endregion
         }
     }

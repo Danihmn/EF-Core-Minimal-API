@@ -72,67 +72,22 @@
         #endregion
 
         #region Inserções, modificações e deleções
-        public static void InserePerfume(Context context, Perfume perfume)
+        public static void InserePerfume(IPerfumeRepository perfumeRepository, Perfume perfume)
         {
-            var perfumista = context.Perfumistas.Find(perfume.PerfumistaId);
-
-            context.Perfumes.Add(perfume);
-            context.SaveChanges();
+            perfumeRepository.Adicionar(perfume);
+            perfumeRepository.SalvarAlteracoes();
         }
 
-        public static void ModificaPerfume(Context context, int id, Perfume novoPerfume)
+        public static void ModificaPerfume(IPerfumeRepository perfumeRepository, int id, Perfume novoPerfume)
         {
-            var perfume = context.Perfumes.Find(id);
-
-            if (perfume is null) return;
-
-            perfume.Marca = novoPerfume.Marca;
-            perfume.Nome = novoPerfume.Nome;
-            perfume.Tipo = novoPerfume.Tipo;
-            perfume.Valor = novoPerfume.Valor;
-            perfume.PerfumistaId = novoPerfume.PerfumistaId;
-            context.SaveChanges();
+            perfumeRepository.Atualizar(novoPerfume);
+            perfumeRepository.SalvarAlteracoes();
         }
 
-        public static IResult AlteraPerfumeComUpdate(Context context, PerfumeUpdate perfumeUpdate)
+        public static void RemovePerfume(IPerfumeRepository perfume, int id)
         {
-            var perfume = context.Perfumes.Find(perfumeUpdate.Id);
-
-            if (string.IsNullOrWhiteSpace(perfumeUpdate.Nome))
-                return Results.BadRequest("Nome do perfume é obrigatório.");
-
-            perfume.Marca = perfumeUpdate.Marca;
-            perfume.Nome = perfumeUpdate.Nome;
-            perfume.Tipo = perfumeUpdate.Tipo;
-            perfume.Valor = perfumeUpdate.Valor;
-
-            context.SaveChanges();
-
-            return Results.Ok(perfume);
-        }
-
-        public static IResult AlteraPerfumeComExecuteUpdate(Context context, PerfumeUpdate perfumeUpdate)
-        {
-            var linhasAfetadas = context.Perfumes
-                .Where(perfume => perfume.Id == perfumeUpdate.Id)
-                .ExecuteUpdate(setter => setter
-                    .SetProperty(perfume => perfume.Marca, perfumeUpdate.Marca)
-                    .SetProperty(perfume => perfume.Nome, perfumeUpdate.Nome)
-                );
-
-            if (linhasAfetadas > 0)
-                return Results.Ok($"Você teve um total de {linhasAfetadas} linha(s) afetada(s)");
-            else
-                return Results.NoContent();
-        }
-
-        public static void RemovePerfumePorId(Context context, int id){
-            var perfumeParaExcluir = context.Perfumes.Find(id);
-
-            if (perfumeParaExcluir is null) return;
-
-            context.Perfumes.Remove(perfumeParaExcluir);
-            context.SaveChanges();
+            perfume.Deletar(id);
+            perfume.SalvarAlteracoes();
         }
         #endregion
     }
