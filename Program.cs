@@ -1,3 +1,6 @@
+using Perfumes.WebAPI.Configuration;
+using Perfumes.WebAPI.Endpoints;
+
 namespace Perfumes.WebAPI
 {
     public class Program

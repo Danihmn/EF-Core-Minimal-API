@@ -1,4 +1,6 @@
-﻿namespace Perfumes.WebAPI.Endpoints
+﻿using Perfumes.WebAPI.EndpointsHandlers;
+
+namespace Perfumes.WebAPI.Endpoints
 {
     /// <summary>
     /// Classe onde se localizam os Endpoints da tabela de perfumes da API

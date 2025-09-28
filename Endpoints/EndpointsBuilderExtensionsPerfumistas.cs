@@ -1,4 +1,6 @@
-﻿namespace Perfumes.WebAPI.Endpoints
+﻿using Perfumes.WebAPI.EndpointsHandlers;
+
+namespace Perfumes.WebAPI.Endpoints
 {
     /// <summary>
     /// Classe onde se localizam os Endpoints da tabela de perfumistas da API
@@ -14,17 +16,9 @@
             #region Consultas
             app.MapGet("/perfumistas", PerfumistasHandlers.ObterTodos).WithOpenApi();
 
-            app.MapGet("/perfumistas/primeiroPerfumista", PerfumistasHandlers.BuscaPrimeiro).WithOpenApi();
-
-            app.MapGet("/perfumistas/ultimoPerfumista", PerfumistasHandlers.BuscaUltimo).WithOpenApi();
-
             app.MapGet("/perfumistas/{id}", PerfumistasHandlers.BuscaPorId).WithOpenApi();
 
-            app.MapGet("/perfumistas/nomePerfumista{id}", PerfumistasHandlers.BuscaNomePorId).WithOpenApi();
-
-            app.MapGet("/perfumistasEFFunctions/porNome/{nome}", PerfumistasHandlers.BuscaNomeComEFFunctions).WithOpenApi();
-
-            app.MapGet("/perfumistas/retornaDefault/{nome}", PerfumistasHandlers.RetornaDefault).WithOpenApi();
+            app.MapGet("/perfumistasEFFunctions/porNome/{nome}", PerfumistasHandlers.BuscaPorNome).WithOpenApi();
             #endregion
 
             #region Inserções, modificações e deleções

@@ -1,4 +1,12 @@
-﻿namespace Perfumes.WebAPI.Configuration
+﻿using Microsoft.AspNetCore.Http.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Perfumes.WebAPI.Domain.Contexto;
+using Perfumes.WebAPI.Repo;
+using Perfumes.WebAPI.Repo.Contratos;
+using System.Text.Json.Serialization;
+
+namespace Perfumes.WebAPI.Configuration
 {
     /// <summary>
     /// Classe de serviços adicionais
@@ -12,6 +20,7 @@
             services.AddDbContext<Context>(options => options.UseSqlite(connectionString).LogTo(Console.WriteLine, LogLevel.Information));
 
             services.AddScoped<IPerfumeRepository, PerfumeRepository>();
+            services.AddScoped<IPerfumistaRepository, PerfumistaRepository>();
 
             return services;
         }
