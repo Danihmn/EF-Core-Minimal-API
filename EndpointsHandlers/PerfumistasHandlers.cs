@@ -10,14 +10,14 @@ namespace Perfumes.WebAPI.EndpointsHandlers
     public static class PerfumistasHandlers
     {
         #region Consultas
-        public static List<Perfumista> ObterTodos(IPerfumistaRepository perfumistaRepository) =>
-            perfumistaRepository.ObterTodos();
+        public static async Task<List<Perfumista>> ObterTodos (IPerfumistaRepository perfumistaRepository) =>
+            await perfumistaRepository.ObterTodos();
 
-        public static List<Perfumista> BuscaPorId(IPerfumistaRepository perfumistaRepository, int id) =>
-            perfumistaRepository.ObterPorId(id);
+        public static async Task<List<Perfumista>> BuscaPorId (IPerfumistaRepository perfumistaRepository, int id) =>
+            await perfumistaRepository.ObterPorId(id);
 
-        public static List<Perfumista> BuscaPorNome(IPerfumistaRepository perfumistaRepository, string nome) =>
-            perfumistaRepository.ObterPorNome(nome);
+        public static async Task<List<Perfumista>> BuscaPorNome (IPerfumistaRepository perfumistaRepository, string nome) =>
+            await perfumistaRepository.ObterPorNome(nome);
         #endregion
 
         #region Inserções, modificações e deleções
