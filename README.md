@@ -12,3 +12,5 @@ O motivo da escolha do ASP.NET Minimal API foi para realizar o processo de manip
   <img height="50em" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original-wordmark.svg" />
   <img height="50em" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/swagger/swagger-original-wordmark.svg" />
 </div>
+
+#### Projeto descontinuado
